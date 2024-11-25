@@ -22,16 +22,15 @@ def choose(m):
 
 
 def make_new_task():
-    with open("tasks.json", mode="r+", encoding="utf-8") as file:
-        Tasks_base = {"Tasks:": {"beta": ""}}
-        Complete_base = {"Complete": {"beta": ""}}
-        Description_base = {"Description": {"beta": ""}}
-        tasks_new = ""
-        complete_new = ""
-        description_new = ""
-
+    tasks_take = input("Enter your task:")
+    description_take = input("Enter your description for task")
+    with open("tasks.json", mode="r", encoding="utf-8") as file:
         data = json.load(file)
 
+        data["Tasks:"][tasks_take] = ""
+        data["Description"][description_take] = ""
+
+        print(data)
 
 def read_new_tasks():
     with open("tasks.json", mode="r", encoding="utf-8") as file:
