@@ -2,10 +2,9 @@ import sys
 import json
 from tabulate import tabulate
 
-base = {"Tasks:": {"beta": ""}, "Complete": {"beta": ""}, "Description": {"beta": ""}}
 
-def start_message():
-    m1 = print(f"1. Add new task\n2. See tasks\n3. Delete task\n4. Exit ")
+def messages():
+    print(f"1. Add new task\n2. See tasks\n3. Delete task\n4. Reset tasks\n0. Exit ")
 
 
 def choose(m):
@@ -16,10 +15,11 @@ def choose(m):
     elif m == 3:
         delete_new_tasks()
     elif m == 4:
+        reset_tasks()
+    elif m == 0:
         exit()
     else:
         print("Idk, pls repeate")
-
 
 
 def make_new_task():
@@ -32,6 +32,7 @@ def make_new_task():
     with open("tasks.json", mode="w", encoding="utf-8") as file:
         json.dump(data, file)
 
+
 def read_new_tasks():
     with open("tasks.json", mode="r", encoding="utf-8") as file:
         data = json.load(file)
@@ -41,6 +42,13 @@ def read_new_tasks():
 
 def delete_new_tasks():
     pass
+
+
+def reset_tasks():
+    base = {"Tasks:": {"beta": ""}, "Complete": {"beta": ""}, "Description": {"beta": ""}}
+    with open("tasks.json", mode="w", encoding="utf-8") as file:
+        json.dump(base, file)
+    print("Cleared!")
 
 
 def exit():

@@ -3,7 +3,7 @@ from lib_for_program import *
 
 def motor():
     while True:
-        start_message()
+        messages()
         m = int(input("choose the comand:"))
         choose(m)
 
