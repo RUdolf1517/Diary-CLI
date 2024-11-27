@@ -27,8 +27,7 @@ def make_new_task():
     description_take = input("Enter your description for task: ")
     with open("tasks.json", mode="r", encoding="utf-8") as file:
         data = json.load(file)
-        data["Tasks:"][tasks_take] = ""
-        data["Description"][description_take] = ""
+        data[tasks_take] = description_take
     with open("tasks.json", mode="w", encoding="utf-8") as file:
         json.dump(data, file)
 
@@ -36,16 +35,22 @@ def make_new_task():
 def read_new_tasks():
     with open("tasks.json", mode="r", encoding="utf-8") as file:
         data = json.load(file)
-        print(tabulate(data, headers="keys", tablefmt="grid"))
+        table_data = [(key, value) for key, value in data.items()]
+        print(tabulate(table_data, headers=["Tasks:", "Description"], tablefmt="fancy_grid"))
         print(data)
 
 
 def delete_new_tasks():
-    pass
+    tasks_take_del = input("Enter your task for delete: ")
+    with open("tasks.json", mode="r", encoding="utf-8") as file:
+        data = json.load(file)
+        del data[tasks_take_del]
+    with open("tasks.json", mode="w", encoding="utf-8") as file:
+        json.dump(data, file)
 
 
 def reset_tasks():
-    base = {"Tasks:": {"beta": ""}, "Complete": {"beta": ""}, "Description": {"beta": ""}}
+    base = {}
     with open("tasks.json", mode="w", encoding="utf-8") as file:
         json.dump(base, file)
     print("Cleared!")
