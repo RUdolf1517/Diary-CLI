@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 from lib_for_program import *
 
 
