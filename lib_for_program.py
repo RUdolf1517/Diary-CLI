@@ -4,7 +4,7 @@ from tabulate import tabulate
 
 
 def messages():
-    print(f"1. Add new task\n2. See tasks\n3. Delete task\n4. Reset tasks\n0. Exit ")
+    print(f"1. Add new task\n2. See tasks\n3. Delete task\n4. Reset tasks\n5. Edit task\n0. Exit ")
 
 
 def choose(m):
@@ -16,6 +16,8 @@ def choose(m):
         delete_new_tasks()
     elif m == 4:
         reset_tasks()
+    elif m == 5:
+        edit_task()
     elif m == 0:
         exit()
     else:
@@ -54,6 +56,16 @@ def reset_tasks():
     with open("tasks.json", mode="w", encoding="utf-8") as file:
         json.dump(base, file)
     print("Cleared!")
+
+
+def edit_task():
+    tasks_take_edit = input("Enter your task for edit: ")
+    description_take = input("Enter your description for task: ")
+    with open("tasks.json", mode="r", encoding="utf-8") as file:
+        data = json.load(file)
+        data[tasks_take_edit] = description_take
+    with open("tasks.json", mode="w", encoding="utf-8") as file:
+        json.dump(data, file)
 
 
 def exit():
