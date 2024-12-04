@@ -1,6 +1,6 @@
 
 # Diary-CLI
-
+IT'S ALFA!
 Diary CLI is a simple yet powerful command-line diary application built with Python. This program allows users to easily create, manage, and store diary entries directly from the terminal, providing a straightforward and efficient way to keep track of thoughts, experiences, and daily activities.
 
 
