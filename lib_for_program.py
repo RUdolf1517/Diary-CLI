@@ -1,6 +1,9 @@
+#from main import *
 import sys
 import json
 from tabulate import tabulate
+import curses
+
 
 
 def messages():
@@ -34,12 +37,18 @@ def make_new_task():
         json.dump(data, file)
 
 
-def read_new_tasks():
+def read_new_tasks(stdscr):
     with open("tasks.json", mode="r", encoding="utf-8") as file:
         data = json.load(file)
         table_data = [(key, value) for key, value in data.items()]
-        print(tabulate(table_data, headers=["Tasks:", "Description"], tablefmt="fancy_grid"))
-        print(data)
+        tab = (tabulate(table_data, headers=["Tasks:", "Description"], tablefmt="fancy_grid"))
+        #print(data)
+        stdscr.clear()
+        stdscr.addstr(0, 0, tab)
+        stdscr.refresh()
+        stdscr.getch()
+
+
 
 
 def delete_new_tasks():
